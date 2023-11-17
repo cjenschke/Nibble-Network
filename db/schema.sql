@@ -19,22 +19,25 @@ CREATE TABLE Users (
 CREATE TABLE Recipes (
   RecipeID INT PRIMARY KEY AUTO_INCREMENT,
   Title VARCHAR(255) NOT NULL,
-  URL VARCHAR(255) NOT NULL,
-  -- Add other fields for recipe details
+  URL VARCHAR(255) NOT NULL
 );
+
 
 -- Create the UserRecipes table to establish many-to-many relationship
 CREATE TABLE UserRecipes (
   UserRecipeID INT PRIMARY KEY AUTO_INCREMENT,
-  UserID INT,
+  UserID INT, 
   RecipeID INT,
-  FOREIGN KEY (UserID) REFERENCES Users(UserID),
+  FOREIGN KEY (UserID) REFERENCES Users(UserID), 
   FOREIGN KEY (RecipeID) REFERENCES Recipes(RecipeID)
 );
+
+
 
 -- Query to get saved recipes for a user
 -- Replace :userID with the actual user ID you want to retrieve recipes for
 SELECT Recipes.Title, Recipes.URL
 FROM UserRecipes
 JOIN Recipes ON UserRecipes.RecipeID = Recipes.RecipeID
-WHERE UserRecipes.UserID = :userID;
+WHERE UserRecipes.UserID = 1; -- Replace 1 with the actual user ID
+
