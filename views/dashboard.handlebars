@@ -24,7 +24,6 @@
             <button id="searchRecipesButton" type="button" class="btn btn-primary mb-3" onclick="searchRecipes()">Search Recipes</button>
         </div>
 
-
         <!-- Third (Right) Container -->
         <div class="col-md-4">
             <div class="floating-effect">
@@ -41,11 +40,41 @@
     </div>
 </div>
 
-
-
-
 <script>
-    // JavaScript for delete functionality
+    // Existing JavaScript for delete functionality
     // ...
+
+    // JavaScript for adding ingredients to local storage
+    document.getElementById('addIngredientForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const ingredient = document.getElementById('newIngredient').value;
+        if (ingredient) {
+            addIngredientToLocal(ingredient);
+            document.getElementById('newIngredient').value = ''; // Clear the input field
+            updateIngredientListDisplay();
+        }
+    });
+
+    function addIngredientToLocal(ingredient) {
+        let ingredients = JSON.parse(localStorage.getItem('ingredients')) || [];
+        ingredients.push(ingredient);
+        localStorage.setItem('ingredients', JSON.stringify(ingredients));
+    }
+
+    function updateIngredientListDisplay() {
+        const ingredients = JSON.parse(localStorage.getItem('ingredients')) || [];
+        const ingredientListElement = document.getElementById('ingredientList');
+        ingredientListElement.innerHTML = '';
+        ingredients.forEach(ingredient => {
+            const li = document.createElement('li');
+            li.textContent = ingredient;
+            li.classList.add('list-group-item');
+            ingredientListElement.appendChild(li);
+        });
+    }
+
+    // Call this function to display ingredients when the page loads
+    updateIngredientListDisplay();
 </script>
+
 

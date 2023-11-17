@@ -44,10 +44,11 @@ const registrationRoutes = require('./controllers/registrationRoutes');
 const dashboardRoutes = require('./controllers/dashboardRoutes');
 const resultsRoutes = require('./controllers/resultsRoutes');
 const recipeRoutes = require('./controllers/recipeRoutes');
+const ingredientController = require('./controllers/ingredientController');
 
 // Mount the 'apiRouter' at teh '/api' endpoint
 app.use('/api', apiRouter); // Sets up the api search
-
+app.use('/api', ingredientController);
 app.use('/', homeRoutes);
 app.use('/', loginRoutes);
 app.use('/', registrationRoutes);
