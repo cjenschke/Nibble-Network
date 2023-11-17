@@ -8,7 +8,7 @@ CREATE DATABASE nibble_network_db;
 USE nibble_network_db;
 
 -- Create the Users table
-CREATE TABLE Users (
+CREATE TABLE User (
   UserID INT PRIMARY KEY AUTO_INCREMENT,
   Username VARCHAR(255) NOT NULL,
   Email VARCHAR(255) NOT NULL,
@@ -24,12 +24,12 @@ CREATE TABLE Recipes (
 
 
 -- Create the UserRecipes table to establish many-to-many relationship
-CREATE TABLE UserRecipes (
-  UserRecipeID INT PRIMARY KEY AUTO_INCREMENT,
-  UserID INT, 
-  RecipeID INT,
-  FOREIGN KEY (UserID) REFERENCES Users(UserID), 
-  FOREIGN KEY (RecipeID) REFERENCES Recipes(RecipeID)
+CREATE TABLE UserRecipe (
+  user_recipe_id INTEGER AUTO_INCREMENT PRIMARY KEY,
+  user_id INTEGER NOT NULL,
+  recipe_id INTEGER NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES User (UserID),
+  FOREIGN KEY (recipe_id) REFERENCES Recipes (RecipeID)
 );
 
 
@@ -37,7 +37,7 @@ CREATE TABLE UserRecipes (
 -- Query to get saved recipes for a user
 -- Replace :userID with the actual user ID you want to retrieve recipes for
 SELECT Recipes.Title, Recipes.URL
-FROM UserRecipes
-JOIN Recipes ON UserRecipes.RecipeID = Recipes.RecipeID
-WHERE UserRecipes.UserID = 1; -- Replace 1 with the actual user ID
+FROM UserRecipe
+JOIN Recipes ON UserRecipe.recipe_id = Recipes.RecipeID
+WHERE UserRecipe.user_id = 1; -- Replace 1 with the actual user ID
 
