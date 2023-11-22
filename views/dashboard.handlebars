@@ -1,0 +1,53 @@
+{{!-- views/dashboard.handlebars: --}}
+{{> navbar }}
+<body>
+    <div class="container-fluid mt-4">
+        <div class="row">
+            <!-- Left Container for Saved Ingredients -->
+            <div class="col-lg-4 col-md-6">
+                <div class="floating-effect">
+                    <h2>My Cupboard</h2>
+                    <form id="addIngredientForm" class="form-inline mb-3">
+                        <input type="text" id="newIngredient" class="form-control mr-2" placeholder="Add new ingredient" />
+                        <button type="submit" class="btn btn-primary">Add</button>
+                    </form>
+                    <ul id="ingredientList" class="list-group">
+                        <!-- Ingredients will be dynamically loaded here -->
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Middle Container for Ingredient Input Boxes -->
+            <div class="col-lg-4 col-md-6">
+                <form id="ingredientForm">
+                    <input type="text" id="ingredient1" placeholder="Ingredient 1" class="form-control mb-2 ingredient-input">
+                    <!-- Additional ingredient input boxes -->
+                    <input type="text" id="ingredient2" placeholder="Ingredient 2" class="form-control mb-2 ingredient-input" style="display: none;">
+                    <!-- Continue for other ingredients... -->
+                    <!-- Include all ingredient input fields up to ingredient10 as in your original file -->
+                    <div class="buttons">
+                        <button type="submit" class="btn btn-primary">Search Recipes</button>
+                        <button type="button" id="resetIngredientsButton" class="btn btn-secondary ml-2">Reset</button>
+                    </div>
+                </form>
+                <div id="searchResults" class="search-results mt-3">
+                    <!-- Search results will be dynamically loaded here -->
+                </div>
+            </div>
+
+            <!-- Right Container for Favorite Recipes -->
+            <div class="col-lg-4 col-md-12">
+                <div class="floating-effect">
+                    <h2>Favorite Recipes</h2>
+                    {{#each recipes}}
+                    <div class="recipe-item mb-2">
+                        <a href="/recipe/{{this.image}}" class="text-decoration-none">{{this.title}}</a>
+                        <span class="delete-icon" onclick="deleteRecipe({{this.id}})">🗑️</span>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/js/script.js"></script>
+</body>

@@ -1,0 +1,16 @@
+{{!-- views/homepage.handlebars: --}}
+{{> navbar }}
+
+<div class="container mt-4">
+    <div class="random-recipes">
+        <h1>Random Recipes</h1>
+        <div>
+            {{#each recipes}}
+                <div class="recipe-item mb-2">
+                    <img src="{{this.image}}" alt="{{this.title}}">
+                    <a href="{{this.sourceUrl}}" class="text-decoration-none">{{this.title}}</a>
+                </div>
+            {{/each}}
+        </div>
+    </div>
+</div>

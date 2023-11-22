@@ -1,0 +1,4 @@
+.env
+/node_modules
+public/css/*.swp
+SPOONACULAR_API_KEY = '3a3e3dcbdc5a44c096474496f79d5c2c'
